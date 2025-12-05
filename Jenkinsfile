@@ -23,7 +23,11 @@ pipeline {
         }
         stage('Running Tests...'){
             steps {
-                sh 'pytest -q'
+
+                sh '''
+                    . venv/bin/activate
+                    pytest -q
+                '''
             }
         }
         stage('Build Docker Image') {
