@@ -11,5 +11,27 @@ pipeline {
                 echo "SUCCESS: GitHub Webhook triggered this Jenkins build!"
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    echo "Building Docker Image...."
+                    sh "docker build -t flaskapp:latest ."
+                }
+            }
+        }
+        stage('Running Container from Docker Image') {
+            steps {
+                script {
+                    echo "Stopping running container if any..."
+                    sh """
+                        docker stop flaskapp || true
+                        docker rm flaskapp || true
+                    """
+
+                    echo "Running New Container..."
+                    sh 'docker run -d -p 5000:5000 --name flaskapp flaskapp:latest'
+                }
+            }
+        }
     }
 }
