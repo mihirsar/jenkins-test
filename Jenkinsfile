@@ -1,24 +1,22 @@
 pipeline {
-agent any
+    agent any
 
 
-triggers {
-    githubPush()
-}
-
-stages {
-    stage('Checkout') {
-        steps {
-            checkout scm
-        }
+    triggers {
+        githubPush()
     }
 
-    stage('Webhook Test') {
-        steps {
-            echo "SUCCESS: GitHub Webhook triggered this Jenkins build!"
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Webhook Test') {
+            steps {
+                echo "SUCCESS: GitHub Webhook triggered this Jenkins build!"
+            }
         }
     }
-}
-
-
 }
