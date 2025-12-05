@@ -11,6 +11,11 @@ pipeline {
                 echo "SUCCESS: GitHub Webhook triggered this Jenkins build!"
             }
         }
+        stage('Running Tests...'){
+            steps {
+                sh 'pytest -q'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
