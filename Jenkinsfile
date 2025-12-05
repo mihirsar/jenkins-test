@@ -11,6 +11,16 @@ pipeline {
                 echo "SUCCESS: GitHub Webhook triggered this Jenkins build!"
             }
         }
+        stage('Installing Dependencies...'){
+            steps {
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install -r requirements.txt
+                    
+                '''
+            }
+        }
         stage('Running Tests...'){
             steps {
                 sh 'pytest -q'
