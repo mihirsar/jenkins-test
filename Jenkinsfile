@@ -38,6 +38,14 @@ pipeline {
                 }
             }
         }
+        stage('Trivy Scanning...'){
+            steps {
+                sh '''
+                    echo "Running Trivy Scan..."
+                    trivy image --exit-code 0 --severity HIGH, CRITICAL flaskapp:latest
+                '''
+            }
+        }
         stage('Running Container from Docker Image') {
             steps {
                 script {
