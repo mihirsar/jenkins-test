@@ -42,7 +42,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Running Trivy Scan..."
-                    trivy image --exit-code 0 --severity HIGH, CRITICAL flaskapp:latest
+                    trivy image --exit-code 0 --severity HIGH,CRITICAL flaskapp:latest
                 '''
             }
         }
